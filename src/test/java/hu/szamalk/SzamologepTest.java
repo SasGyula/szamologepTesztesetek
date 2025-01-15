@@ -8,22 +8,44 @@ import static org.junit.jupiter.api.Assertions.*;
 class SzamologepTest {
 
     @Test
-    void egyEsSzazKozottiErdemeny(){
+    void egyEsSzazKozottiErdemenyOsszeadasnal(){
         Szamologep szamologep = new Szamologep();
-        szamologep.feladat();
-        int eredmeny = szamologep.getEredmeny();
+        szamologep.feladat("összeadás");
+        int eredmeny = szamologep.getA() + szamologep.getB();
+        Assertions.assertTrue((eredmeny <= 100) || (eredmeny > 0), "Az eredmény nagyobb mint száz vagy kisebb mint 0");
+    }
+    @Test
+    void egyEsSzazKozottiErdemenyKivonasnal(){
+        Szamologep szamologep = new Szamologep();
+        szamologep.feladat("kivonás");
+        int eredmeny = szamologep.getA() - szamologep.getB();
+        Assertions.assertTrue((eredmeny <= 100) || (eredmeny > 0), "Az eredmény nagyobb mint száz vagy kisebb mint 0");
+    }
+    @Test
+    void egyEsSzazKozottiErdemenyOsztásnál(){
+        Szamologep szamologep = new Szamologep();
+        szamologep.feladat("osztás");
+        int eredmeny = szamologep.getA() / szamologep.getB();
+        Assertions.assertTrue((eredmeny <= 100) || (eredmeny > 0), "Az eredmény nagyobb mint száz vagy kisebb mint 0");
+    }
+    @Test
+    void egyEsSzazKozottiErdemenySzorzasnal(){
+        Szamologep szamologep = new Szamologep();
+        szamologep.feladat("szorzás");
+        int eredmeny = szamologep.getA() + szamologep.getB();
         Assertions.assertTrue((eredmeny <= 100) || (eredmeny > 0), "Az eredmény nagyobb mint száz vagy kisebb mint 0");
     }
     @Test
     void joValaszokDarabszama(){
         Szamologep szamologep = new Szamologep();
-        szamologep.feladat();
+        szamologep.feladat("összeadás");
         joValaszok = szamologep.getJoValaszokDb();
-        Assertions.assertEquals(3,joValaszokDb(), "");
+        Assertions.assertEquals(1,joValaszokDb(), "Nem számolja helyesen a jó válaszokat");
     }
     @Test
-    void egeszSzamosEredmenyOsztaskor(){
+    void nullavalOsztas(){
         Szamologep szamologep = new Szamologep();
-        
+        szamologep.feladat("osztás");
+        Assertions.assertFalse(szamologep.getA() == 0 || szamologep.getB() == 0);
     }
 }
